@@ -1,0 +1,54 @@
+/* The style of the section containing the
+  search box and the check boxes filter by country */
+.search-container {
+  position: relative;
+  top: 15%;
+  width: 35%;
+  margin: 0 auto;
+}
+
+.filter-country {
+  color: white;
+}
+
+.filter-country label {
+  margin-right: 20px;
+}
+
+.filter-country-container {
+  display: flex;
+  flex-direction: row;
+}
+/* Ultra small devices Example: Custom, iPhone Retina */
+@media (min-width: 320px) {
+  .search-container {
+    width: 90%;
+  }
+}
+
+/* Small devices less than 576px */
+@media (max-width: 576px) {
+  .filter-country-container {
+    flex-direction: column;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .search-container {
+    width: 90%;
+  }
+}
+
+/*The style for laptop devices 992px and up*/
+@media (min-width: 992px) {
+  .search-container {
+    width: 80%;
+  }
+}
+/*The style for laptop devices 1200px and up*/
+@media (min-width: 1200px) {
+  .search-container {
+    width: 55%;
+  }
+}

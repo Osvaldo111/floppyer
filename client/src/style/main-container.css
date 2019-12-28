@@ -1,0 +1,44 @@
+/* The top and bottom sections of the Main page*/
+.container-mainPage {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The style of the top section*/
+.top-mainPage {
+  height: 55vh;
+  background-image: url(../images/background_mainPage.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Style of the button on the top section */
+.button-main-page {
+  font-family: inherit;
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 59px;
+  position: absolute;
+  right: 2%;
+  margin-top: 8px;
+}
+
+.display-nav {
+  position: fixed;
+  display: none;
+}
+
+/*The style for laptop devices and 992px*/
+@media (min-width: 992px) {
+  .button-main-page {
+    padding: 5px 30px;
+  }
+}

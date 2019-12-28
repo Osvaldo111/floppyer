@@ -1,0 +1,94 @@
+.job-desc-container {
+  padding-top: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.job-desc-generals {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style of the button on the top section */
+.button-desc-page {
+  font-family: inherit;
+  background-color: #6495ed;
+  border: none;
+  color: white;
+  padding: 10px 100px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 59px;
+}
+
+/* .job-desc-gral-first {
+  margin-left: 30px;
+} */
+
+.job-desc-gral-apply {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 100px;
+}
+
+.job-desc-centerWrapper {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.jobDesc-extraInfo {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.job-desc-content {
+  display: flex;
+  flex-direction: column;
+}
+/* Ultra small devices Example: Custom, iPhone Retina */
+@media (max-width: 320px) {
+  /* .search-container {
+    width: 90%;
+  } */
+  .job-desc-generals {
+    font-size: 12px;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+  .job-desc-gral-apply {
+    width: 100%;
+  }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+  .job-desc-generals {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .job-desc-content {
+    align-items: center;
+  }
+
+  .jobDesc-extraInfo {
+    width: 90%;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .job-desc-gral-apply {
+    margin-right: 50px;
+  }
+}

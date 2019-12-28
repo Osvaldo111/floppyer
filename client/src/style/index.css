@@ -1,0 +1,53 @@
+html,
+body,
+#root {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+h3,
+a {
+  font-weight: 600;
+}
+
+p {
+  font-weight: 400;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  /* body {
+    background-color: blue;
+  } */
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /* body {
+    background-color: red;
+  } */
+}
+
+/*The style for laptop devices 992px and up*/
+@media (min-width: 992px) {
+  body {
+    /* background-color: red; */
+  }
+}
+
+/*The style for desktop devices 1200px and up*/
+@media (min-width: 1200px) {
+  body {
+    /* background-color: red; */
+  }
+}

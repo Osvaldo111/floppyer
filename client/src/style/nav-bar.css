@@ -1,0 +1,126 @@
+/*The styel for the nabvigation bar*/
+.navBar-wrapper {
+  display: flex;
+  position: fixed;
+  top: 0;
+}
+.navigation-bar {
+  display: flex;
+  height: 10vh;
+  position: fixed;
+  width: 100%;
+  background-image: url(../images/background-navBar.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.navbar-search-box {
+  margin-top: 8px;
+  height: 20px;
+  width: 25%;
+  /* position: absolute; */
+  left: 20px;
+}
+
+.navbar-logo {
+  height: 80px;
+  width: 120px;
+  margin: 0 10px;
+}
+
+.navbar-mobile-button-options {
+  display: none;
+}
+
+.navbar-mobile-button {
+  display: none;
+  border: none;
+  height: 60px;
+  width: 60px;
+  background: url(../images/hamburguer-white-icon.svg) no-repeat;
+  background-size: 60px 60px;
+}
+
+.navbar-mobile-button {
+  border: none;
+  height: 60px;
+  width: 60px;
+  background: url(../images/hamburguer-white-icon.svg) no-repeat;
+  background-size: 60px 60px;
+}
+
+.navbar-mobile-searchContainer {
+  width: 100%;
+  background-color: #99badd;
+  padding: 10px 0 10px 10px;
+}
+
+.navbar-mobile-searchContainer div {
+  width: 80%;
+  /* margin: 10px 0px 10px 5px; */
+}
+
+.navbar-mobile-searchContainer:hover {
+  background-color: #6495ed;
+}
+
+.navbar-mobile-btn-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 60px;
+  background-color: #99badd;
+}
+
+.navbar-mobile-btn-wrapper a {
+  text-decoration: none;
+  color: black;
+  margin-left: 5px;
+  font-size: 20px;
+}
+
+.navbar-mobile-btn-wrapper:hover {
+  background-color: #6495ed;
+}
+
+@media (min-width: 993px) {
+  .navbar-mobile-button-options div {
+    display: none;
+  }
+}
+/*The style for laptop devices 992px ann less*/
+@media (max-width: 992px) {
+  .navBar-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #0f52ba;
+    width: 100%;
+    position: fixed;
+  }
+  .navigation-bar {
+    justify-content: space-between;
+    margin: 10px;
+    /*Reset past values*/
+    width: auto;
+    height: auto;
+    position: static;
+    background-image: none;
+  }
+
+  .button-main-page {
+    display: none;
+  }
+  .navbar-logo {
+    margin: 0px;
+    height: 60px;
+    width: 120px;
+  }
+  .navbar-mobile-button {
+    display: inline;
+    /* margin: 0 10px; */
+    /* margin-left: auto; */
+  }
+}

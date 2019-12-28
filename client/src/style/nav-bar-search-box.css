@@ -1,0 +1,31 @@
+/* This is the style of the form wrapping the 
+   search bar */
+.form-container-navBar {
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 59px;
+}
+
+/* The style of the search bar */
+.search-box-navBar {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #dddd;
+  border-radius: 4px;
+  font-size: 10px;
+  background-color: white;
+  background-image: url("../images/search-icon.svg");
+  background-size: 15px;
+  background-position: center;
+  background-position-x: 3%;
+  background-repeat: no-repeat;
+  padding: 6px 10px 6px 40px;
+}
+
+/*The style for desktop devices 1200px and up*/
+@media (min-width: 1200px) {
+  .search-box-navBar {
+    background-position-x: 1%;
+  }
+}

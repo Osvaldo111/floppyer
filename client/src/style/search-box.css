@@ -1,0 +1,47 @@
+/* This is the style of the form wrapping the 
+   search bar */
+.form-container {
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 59px;
+  /* display: flex; */
+}
+
+.input-container {
+  display: flex;
+}
+/* The style of the search bar */
+.search-box {
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  border: 2px solid #dddd;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+}
+
+.search-box-icon {
+  border: none;
+  width: 10%;
+  background-color: #dddd;
+  border-radius: 4px;
+  background-image: url("../images/search-icon.svg");
+  background-size: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 576px) {
+  .search-box-icon {
+    width: 15%;
+  }
+}
+
+/* Ultra small devices Example: Custom, iPhone Retina */
+@media (max-width: 320px) {
+  .search-box {
+    padding: 12px 0 12px 0;
+  }
+}
