@@ -6,13 +6,27 @@
 
 /* The style of the top section*/
 .top-mainPage {
-  height: 55vh;
-  background-image: url(../images/background_mainPage.svg);
+  display: flex;
+  flex-direction: column;
+  height: 45vh;
+  background-image: url(../images/background.svg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
+.btn-mainpage,
+.btn-mainpage-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-decoration: none;
+  padding: 10px 10px 0 0;
+}
+
+.btn-mainpage-bottom {
+  display: none;
+}
 /* Style of the button on the top section */
 .button-main-page {
   font-family: inherit;
@@ -22,13 +36,9 @@
   padding: 10px 30px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 20px;
   cursor: pointer;
   border-radius: 59px;
-  position: absolute;
-  right: 2%;
-  margin-top: 8px;
 }
 
 .display-nav {
@@ -36,9 +46,76 @@
   display: none;
 }
 
+.floppyer-mainpage {
+  font-family: "Baloo Bhai", cursive;
+  text-align: center;
+  color: white;
+  font-size: 60px;
+  margin-top: 15px;
+}
+
+.floppyer-text {
+  font-size: 16px;
+  margin: 0;
+}
+
+/*Wrapper to center the container of the 
+ searcg box*/
+.searchBox-mainPage-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+/* After wrapping the component, choose the width*/
+.searchBox-mainPage-container {
+  width: 40%;
+}
+
+/*The style for laptop devices and 1024px*/
+@media (max-width: 1024px) {
+  .searchBox-mainPage-container {
+    width: 50%;
+  }
+}
+
+/*The style for laptop devices and 768px*/
+@media (max-width: 768px) {
+  .searchBox-mainPage-container {
+    width: 60%;
+  }
+}
+
 /*The style for laptop devices and 992px*/
-@media (min-width: 992px) {
-  .button-main-page {
-    padding: 5px 30px;
+@media (max-width: 425px) {
+  .btn-mainpage {
+    display: none;
+  }
+
+  .btn-mainpage-bottom {
+    color: red;
+    display: flex;
+    align-items: center;
+    padding: 20px 0px 0px 0px;
+  }
+
+  .searchBox-mainPage-container {
+    width: 90%;
+  }
+}
+
+/*The style for laptop devices and 320px*/
+@media (max-width: 375px) {
+  .floppyer-mainpage {
+    font-size: 30px;
+  }
+
+  .floppyer-text {
+    font-size: 12px;
+  }
+
+  .top-mainPage {
+    height: 60vh;
   }
 }

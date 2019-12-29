@@ -49,23 +49,6 @@ class JobsContaier extends React.Component {
         }
       );
     }
-
-    /**
-     *
-     * Check if the user has selected the checkbox "All Jobs"
-     * Use the "previousProps" to avoid looping in the function.
-     * And compare the keyword to avoid unnecesary called to the
-     * server when the user is in the main page.
-     */
-    if (
-      previousProps.checkBoxValueAllJobs !== this.props.checkBoxValueAllJobs &&
-      this.props.checkBoxValueAllJobs &&
-      this.props.searchBoxData !== ""
-    ) {
-      // The function "getJobDescription" is called
-      // because the props are changed.
-      this.props.setSearchBoxData("");
-    }
   }
 
   getJobDescription = param => {
@@ -156,8 +139,7 @@ class JobsContaier extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    searchBoxData: state.searchBox.searchBoxData,
-    checkBoxValueAllJobs: state.checkBoxFilter.checkBoxValueAllJobs
+    searchBoxData: state.searchBox.searchBoxData
   };
 }
 const mapDispatchToProps = {

@@ -1,8 +1,8 @@
 import React from "react";
 import "../style/main-container.css";
-import SearchBoxContainer from "./search-box-MainPage";
 import JobsContaier from "./job-container";
 import NavigationBar from "./nav-bar";
+import SearchBox from "./search-box";
 import { Link } from "react-router-dom";
 
 /**
@@ -57,10 +57,24 @@ export default class MainContainer extends React.Component {
     return (
       <div className="container-mainPage">
         <div className="top-mainPage">
-          <Link to="/postJob">
+          <Link to="/postJob" className="btn-mainpage">
             <button className="button-main-page">Post Job</button>
           </Link>
-          <SearchBoxContainer />
+          <div className="floppyer-mainpage">
+            <span>floppyer</span>
+            <p className="floppyer-text">
+              We browse the web for you to get most of the jobs in the software
+              Industry.
+            </p>
+          </div>
+          <div className="searchBox-mainPage-wrapper">
+            <div className="searchBox-mainPage-container">
+              <SearchBox />
+            </div>
+          </div>
+          <Link to="/postJob" className="btn-mainpage-bottom">
+            <button className="button-main-page">Post Job</button>
+          </Link>
         </div>
         <div className="display-nav" style={{ display: this.state.display }}>
           <NavigationBar hideNavBar={this.state.hideBarInTopPage} />

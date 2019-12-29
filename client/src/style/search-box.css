@@ -5,7 +5,8 @@
   background-color: white;
   padding: 20px;
   border-radius: 59px;
-  /* display: flex; */
+  display: flex;
+  flex-direction: column;
 }
 
 .input-container {
@@ -13,7 +14,7 @@
 }
 /* The style of the search bar */
 .search-box {
-  flex: 1 1 auto;
+  width: 90%;
   box-sizing: border-box;
   border: 2px solid #dddd;
   border-radius: 4px;
@@ -22,8 +23,8 @@
 }
 
 .search-box-icon {
-  border: none;
   width: 10%;
+  border: none;
   background-color: #dddd;
   border-radius: 4px;
   background-image: url("../images/search-icon.svg");
@@ -32,16 +33,20 @@
   background-repeat: no-repeat;
 }
 
-/* Small devices (landscape phones, 576px and up) */
+/* Small devices (landscape phones, 576px and up)
 @media (max-width: 576px) {
   .search-box-icon {
     width: 15%;
   }
-}
+} */
 
 /* Ultra small devices Example: Custom, iPhone Retina */
-@media (max-width: 320px) {
+@media (max-width: 425px) {
   .search-box {
-    padding: 12px 0 12px 0;
+    width: 80%;
+  }
+
+  .search-box-icon {
+    width: 20%;
   }
 }

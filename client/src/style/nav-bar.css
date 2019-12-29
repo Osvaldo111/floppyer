@@ -109,10 +109,6 @@
     position: static;
     background-image: none;
   }
-
-  .button-main-page {
-    display: none;
-  }
   .navbar-logo {
     margin: 0px;
     height: 60px;

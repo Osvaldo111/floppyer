@@ -34,6 +34,8 @@ class SearchBox extends React.Component {
           className="input-container"
           onSubmit={this.handleSubmit}
         >
+          {/* <div className="search-box">d</div>
+          <div className="search-box-icon">s</div> */}
           <input
             className="search-box"
             type="text"
