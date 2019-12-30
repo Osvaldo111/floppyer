@@ -33,12 +33,12 @@
   background-repeat: no-repeat;
 }
 
-/* Small devices (landscape phones, 576px and up)
-@media (max-width: 576px) {
-  .search-box-icon {
-    width: 15%;
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .form-container {
+    padding: 0;
   }
-} */
+}
 
 /* Ultra small devices Example: Custom, iPhone Retina */
 @media (max-width: 425px) {

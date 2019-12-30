@@ -73,40 +73,58 @@
   width: 40%;
 }
 
-/*The style for laptop devices and 1024px*/
-@media (max-width: 1024px) {
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
   .searchBox-mainPage-container {
     width: 50%;
   }
 }
 
-/*The style for laptop devices and 768px*/
-@media (max-width: 768px) {
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
   .searchBox-mainPage-container {
     width: 60%;
   }
+
+  .top-mainPage {
+    height: 50vh;
+  }
 }
 
-/*The style for laptop devices and 992px*/
-@media (max-width: 425px) {
+/* Targeting landscape devices such as Pixel2XL*/
+@media (max-width: 991.98px) and (orientation: landscape) {
+  .top-mainPage {
+    height: 70vh;
+  }
+
+  .floppyer-mainpage {
+    font-size: 40px;
+  }
+
+  .floppyer-text {
+    font-size: 12px;
+  }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
   .btn-mainpage {
     display: none;
   }
 
   .btn-mainpage-bottom {
-    color: red;
     display: flex;
     align-items: center;
     padding: 20px 0px 0px 0px;
   }
 
   .searchBox-mainPage-container {
-    width: 90%;
+    width: 80%;
   }
-}
 
-/*The style for laptop devices and 320px*/
-@media (max-width: 375px) {
+  .searchBox-mainPage-wrapper {
+    padding: 0;
+  }
   .floppyer-mainpage {
     font-size: 30px;
   }
@@ -116,6 +134,34 @@
   }
 
   .top-mainPage {
-    height: 60vh;
+    height: 70vh;
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .top-mainPage {
+    height: 40vh;
+  }
+
+  .searchBox-mainPage-wrapper {
+    padding: 10px;
+  }
+
+  .floppyer-mainpage > p {
+    padding: 0px 5px;
+  }
+}
+/* Targeting landscape devices such as Pixel2XL*/
+@media (max-width: 575.98px) and (orientation: landscape) {
+  .top-mainPage {
+    height: 70vh;
+  }
+}
+
+/* Ultra small devices Example: Custom, iPhone Retina */
+@media (max-width: 320px) {
+  .top-mainPage {
+    height: 50vh;
   }
 }
