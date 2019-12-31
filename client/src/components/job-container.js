@@ -4,7 +4,8 @@ import "../style/card-container.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setSearchBoxData } from "../actions";
-
+import DataEnteredDisplay from "./dataSearchBox";
+import moment from "moment"; // Use this module to format the date
 /**
  * @author Osvaldo Carrillo
  * Date: 22/11/2019
@@ -98,6 +99,7 @@ class JobsContaier extends React.Component {
     if (this.state.loading) return "Loading, wait.....";
     return (
       <div className="card-space">
+        <DataEnteredDisplay />
         {list.map(item => {
           return (
             <Link
@@ -111,7 +113,8 @@ class JobsContaier extends React.Component {
             >
               <JobCard
                 job_position={item.job_position}
-                date_posted={item.date_posted}
+                /* Use the "moment" module to display the date from now*/
+                date_posted={moment(item.date_posted).fromNow()}
                 company_name={item.company_name}
                 job_hours={item.job_hours ? item.job_hours : "Full-Time"}
               />

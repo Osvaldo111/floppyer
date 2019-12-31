@@ -2,7 +2,7 @@
 .job-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  margin-bottom: 80px;
+  margin-bottom: 10px;
 }
 
 .job-card:hover {
@@ -18,4 +18,43 @@
 .job-card-sameLineInfo {
   display: flex;
   justify-content: space-between;
+}
+
+.job-card-sameLineInfo > h2 {
+  font-size: 15px;
+  margin: 10px 0 0 0;
+}
+
+.job-card-information > h3 {
+  font-size: 12px;
+  margin: 10px 0 0 0;
+}
+
+/* Ultra small devices Example: Custom, iPhone Retina */
+@media (max-width: 320px) {
+  .job-card-sameLineInfo > h2 {
+    font-size: 12px;
+    margin: 10px 0 0 0;
+  }
+
+  .job-card-information > p,
+  .job-card-sameLineInfo > p {
+    font-size: 10px;
+  }
+}
+
+/* Small devices (landscape phones, 576px and less) */
+@media (max-width: 576px) {
+  .job-card-sameLineInfo > h2 {
+    font-size: 12px;
+    margin: 10px 0 0 0;
+  }
+}
+
+/* Medium devices (tablets, 768px and less) */
+@media (max-width: 768px) {
+  .job-card-information > p,
+  .job-card-sameLineInfo > p {
+    font-size: 12px;
+  }
 }

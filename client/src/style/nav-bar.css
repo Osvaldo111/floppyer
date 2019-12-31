@@ -6,63 +6,55 @@
 }
 .navigation-bar {
   display: flex;
-  height: 10vh;
+  height: 70px;
   position: fixed;
   width: 100%;
-  background-image: url(../images/background-navBar.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
+  background-color: #6495ed;
+  justify-content: space-between;
 }
 
-.navbar-search-box {
-  margin-top: 8px;
-  height: 20px;
-  width: 25%;
-  /* position: absolute; */
-  left: 20px;
+.navbar-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  padding-right: 10px;
 }
 
-.navbar-logo {
-  height: 80px;
-  width: 120px;
-  margin: 0 10px;
+.navbar-floppyer {
+  display: flex;
+  font-family: "Baloo Bhai", cursive;
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  text-decoration: none;
+  padding-left: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
+/*
+* Wrapper for the options when the hamburger
+* icon is clicked.
+*/
+
+.navbar-ham-btn-wrapper {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
+}
+.navbar-mobile-button {
+  display: none;
+  border: none;
+  height: 60px;
+  width: 60px;
+  background: url(../images/hamburguer-white-icon.svg) no-repeat;
+  background-size: 60px 60px;
+}
+
+/* Hide the options of the hambuger icon*/
 .navbar-mobile-button-options {
   display: none;
-}
-
-.navbar-mobile-button {
-  display: none;
-  border: none;
-  height: 60px;
-  width: 60px;
-  background: url(../images/hamburguer-white-icon.svg) no-repeat;
-  background-size: 60px 60px;
-}
-
-.navbar-mobile-button {
-  border: none;
-  height: 60px;
-  width: 60px;
-  background: url(../images/hamburguer-white-icon.svg) no-repeat;
-  background-size: 60px 60px;
-}
-
-.navbar-mobile-searchContainer {
-  width: 100%;
-  background-color: #99badd;
-  padding: 10px 0 10px 10px;
-}
-
-.navbar-mobile-searchContainer div {
-  width: 80%;
-  /* margin: 10px 0px 10px 5px; */
-}
-
-.navbar-mobile-searchContainer:hover {
-  background-color: #6495ed;
 }
 
 .navbar-mobile-btn-wrapper {
@@ -77,15 +69,17 @@
 
 .navbar-mobile-btn-wrapper a {
   text-decoration: none;
-  color: black;
+  color: white;
+  font-family: "Baloo Bhai", cursive;
   margin-left: 5px;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .navbar-mobile-btn-wrapper:hover {
   background-color: #6495ed;
 }
 
+/* Hide the dropdown option*/
 @media (min-width: 993px) {
   .navbar-mobile-button-options div {
     display: none;
@@ -101,22 +95,26 @@
     position: fixed;
   }
   .navigation-bar {
-    justify-content: space-between;
-    margin: 10px;
+    /* justify-content: space-between; */
+    /* margin: 10px; */
     /*Reset past values*/
     width: auto;
-    height: auto;
     position: static;
     background-image: none;
   }
-  .navbar-logo {
-    margin: 0px;
-    height: 60px;
-    width: 120px;
+
+  /* Display the hamburger btn wrapper*/
+  .navbar-ham-btn-wrapper {
+    display: flex;
   }
+
+  /* Display the hamburger icon btn*/
   .navbar-mobile-button {
-    display: inline;
-    /* margin: 0 10px; */
-    /* margin-left: auto; */
+    display: flex;
+  }
+
+  /* Remove the "post" button */
+  .navbar-btn-wrapper {
+    display: none;
   }
 }

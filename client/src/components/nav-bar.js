@@ -1,7 +1,6 @@
 import React from "react";
 import "../style/nav-bar.css";
 import { Link } from "react-router-dom";
-import logo from "../images/logo.svg";
 /**
  * @author Osvaldo Carrillo
  * Date: 11/25/2019
@@ -32,28 +31,24 @@ export default class NavigationBar extends React.Component {
         style={{ display: this.props.hideNavBar }}
       >
         <div className="navigation-bar">
-          <Link to="/">
-            <img className="navbar-logo" src={logo} alt="navbar-logo"></img>
+          <Link to="/" className="navbar-floppyer">
+            <span>floppyer</span>
+            {/* <img className="navbar-logo" src={logo} alt="navbar-logo"></img> */}
           </Link>
-          {/* <div className="navbar-search-box"> <NavBarSearchBox /></div> */}
-          <Link to="/postJob">
+          <Link to="/postJob" className="navbar-btn-wrapper">
             <button className="button-main-page">Post Job</button>
           </Link>
-
-          <button
-            className="navbar-mobile-button"
-            onClick={this.displayMobileNavBar}
-          ></button>
+          <div className="navbar-ham-btn-wrapper">
+            <button
+              className="navbar-mobile-button"
+              onClick={this.displayMobileNavBar}
+            ></button>
+          </div>
         </div>
         <div
           className="navbar-mobile-button-options"
           style={{ display: this.state.display }}
         >
-          {/* <div className="navbar-mobile-searchContainer">
-             <div>
-              <NavBarSearchBox />
-            </div> 
-          </div> */}
           <div className="navbar-mobile-btn-wrapper">
             <Link to="/postJob">
               <p>Post Job</p>

@@ -70,7 +70,7 @@
     width: 100%;
   }
 }
-/* Medium devices (tablets, 768px and up) */
+/* Medium devices (tablets, 768px and less) */
 @media (max-width: 768px) {
   .job-desc-generals {
     flex-direction: column;

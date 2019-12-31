@@ -4,7 +4,8 @@ import JobsContaier from "./job-container";
 import NavigationBar from "./nav-bar";
 import SearchBox from "./search-box";
 import { Link } from "react-router-dom";
-
+import { setSearchBoxData } from "../actions";
+import { connect } from "react-redux";
 /**
  * @author Osvaldo Carrillo.
  * Date: 11/21/2019.
@@ -12,7 +13,7 @@ import { Link } from "react-router-dom";
  * for the main page of the site. This class handles the funcionality
  * to hide the navigation bars both in desktop and mobile.
  */
-export default class MainContainer extends React.Component {
+class MainContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,6 +40,17 @@ export default class MainContainer extends React.Component {
     return this.state.display !== newState.display;
   }
 
+  /**
+   * Reset the properties when the logo
+   * is click by the user.
+   */
+  logoIsClicked = () => {
+    this.props.setSearchBoxData("");
+  };
+  /**
+   * Control when to hide and show the
+   * navigation bar.
+   */
   displayNavBar = () => {
     var yAxisWindow = window.scrollY;
     var topMainImage = Math.round(document.documentElement.clientHeight * 0.55);
@@ -61,7 +73,7 @@ export default class MainContainer extends React.Component {
             <button className="button-main-page">Post Job</button>
           </Link>
           <div className="floppyer-mainpage">
-            <span>floppyer</span>
+            <span onClick={this.logoIsClicked}>floppyer</span>
             <p className="floppyer-text">
               We browse the web for you to get most of the jobs in the software
               Industry.
@@ -86,3 +98,9 @@ export default class MainContainer extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  setSearchBoxData
+};
+
+export default connect(null, mapDispatchToProps)(MainContainer);

@@ -1,0 +1,28 @@
+.dataSearchBox-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Baloo Bhai", cursive;
+}
+.dataSearchBox-wrapper > p {
+  margin: 0;
+}
+.dataSearchBox-btn {
+  background-color: #6495ed;
+  border: none;
+  color: white;
+  padding: 5px 20px;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 59px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.dataSearchBox-close {
+  font-size: 30px;
+  padding-left: 20px;
+  color: red;
+}
