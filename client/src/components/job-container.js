@@ -20,7 +20,12 @@ class JobsContaier extends React.Component {
       list: [],
       offsetIndex: 0,
       disabledLoadBtn: false,
-      loading: true
+      loadingPage: true,
+      lastSearch: null,
+      currentSearch: null,
+      displayNotFoundSearch: false,
+      loadingResultsOfSearch: false,
+      jobsWithSameKeyword: false
     };
   }
 
@@ -53,53 +58,98 @@ class JobsContaier extends React.Component {
   }
 
   getJobDescription = param => {
-    fetch("/api/getJobs", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({
-        keyword: param,
-        offsetIndex: this.state.offsetIndex,
-        numJobs: DISPLAY_NUM_JOBS
-      })
-    })
-      .then(result => result.json())
-      .then(listDescription => {
-        var jobDescription = [];
-        // Reset the button
-        this.setState({ disabledLoadBtn: false });
-        if (listDescription.length !== 0) {
-          for (let index = 0; index < listDescription.length; index++) {
-            jobDescription.push(listDescription[index]);
-          }
-          // Update the Offsetindex for the DB
-          var newOffsetindex = this.state.offsetIndex + DISPLAY_NUM_JOBS;
-          // Set the new state
-          this.setState(prevState => ({
-            list: [...prevState.list, ...jobDescription],
-            offsetIndex: newOffsetindex
-          }));
-        } else {
-          // Disabled button, change message and
-          // color of the button.
-          this.setState({ disabledLoadBtn: true });
-        }
+    // Reset the variables "loadingResultsOfSearch" and "disabledLoadBtn"
+    // And use the callback of the setState
+    this.setState(
+      { loadingResultsOfSearch: true, disabledLoadBtn: true },
+      () => {
+        // Getting the data from the server.
+        fetch("/api/getJobs", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify({
+            keyword: param,
+            offsetIndex: this.state.offsetIndex,
+            numJobs: DISPLAY_NUM_JOBS
+          })
+        })
+          .then(result => {
+            return result.json();
+          })
+          .then(result => {
+            // Reset the "displayNotFoundSearch".
+            // And assign the "currentSearch" to compare with the last search.
+            this.setState({
+              currentSearch: this.props.searchBoxData,
+              displayNotFoundSearch: false
+            });
+            return result;
+          })
+          .then(listDescription => {
+            var jobDescription = [];
 
-        return true;
-      })
-      .then(result => {
-        this.setState({ loading: false });
-      });
+            // Check if there is a result from the server.
+            if (listDescription.length !== 0) {
+              for (let index = 0; index < listDescription.length; index++) {
+                jobDescription.push(listDescription[index]);
+              }
+              // Update the Offsetindex for the DB
+              var newOffsetindex = this.state.offsetIndex + DISPLAY_NUM_JOBS;
+              // Set the new states
+              this.setState(prevState => ({
+                list: [...prevState.list, ...jobDescription],
+                offsetIndex: newOffsetindex,
+                lastSearch: this.props.searchBoxData,
+                disabledLoadBtn: false,
+                jobsWithSameKeyword: false
+              }));
+            } else if (this.state.lastSearch === this.state.currentSearch) {
+              // Disabled button, change message and
+              // color of the button.
+              this.setState({
+                disabledLoadBtn: true,
+                jobsWithSameKeyword: true
+              });
+            } else {
+              // Display the not found search
+              this.setState({ displayNotFoundSearch: true });
+            }
+
+            return true;
+          })
+          .then(result => {
+            this.setState({
+              loadingPage: false,
+              loadingResultsOfSearch: false
+            });
+          });
+      }
+    );
   };
 
   render() {
     const { list } = this.state;
 
-    if (this.state.loading) return "Loading, wait.....";
+    if (this.state.loadingPage) return "Loading, wait.....";
+
+    if (this.state.displayNotFoundSearch)
+      return (
+        <div className="container-serachNotFound">
+          <h3>Try with another keyword. For example: Node, Wordpress, React</h3>
+          <p>
+            The search <b>"{this.state.currentSearch}"</b> was not found
+          </p>
+        </div>
+      );
+
     return (
       <div className="card-space">
-        <DataEnteredDisplay />
+        {/* Check if offset has been updated */}
+        {this.state.offsetIndex ? <DataEnteredDisplay /> : "Loading results..."}
+
+        {/* Iteration of the array */}
         {list.map(item => {
           return (
             <Link
@@ -121,20 +171,39 @@ class JobsContaier extends React.Component {
             </Link>
           );
         })}
-        <div className="JobContainer-loadButon-container">
-          <button
-            className="JobContainer-loadButton"
-            onClick={() => this.getJobDescription(this.props.searchBoxData)}
-            disabled={this.state.disabledLoadBtn}
-            style={{
-              backgroundColor: !this.state.disabledLoadBtn ? "" : "red"
-            }}
-          >
-            {!this.state.disabledLoadBtn
-              ? "Load More Jobs"
-              : "Sorry, there are no more.."}
-          </button>
-        </div>
+
+        {/* Check the array before displaying the button */}
+        {/* For the color of the button. When the button is disabled and
+            there are no more matches with the keyword change to 'red'. And when
+            the button is disabled and the results are loading change to 'gray' */}
+        {list.length > 0 ? (
+          <div className="JobContainer-loadButon-container">
+            <button
+              className="JobContainer-loadButton"
+              onClick={() => this.getJobDescription(this.props.searchBoxData)}
+              disabled={this.state.disabledLoadBtn}
+              style={{
+                backgroundColor:
+                  this.state.disabledLoadBtn && this.state.jobsWithSameKeyword
+                    ? "red"
+                    : "" ||
+                      (this.state.disabledLoadBtn &&
+                        this.state.loadingResultsOfSearch)
+                    ? "gray"
+                    : ""
+              }}
+            >
+              {this.state.disabledLoadBtn && this.state.jobsWithSameKeyword
+                ? "Sorry there are no more Jobs"
+                : this.state.jobsWithSameKeyword === false &&
+                  this.state.loadingResultsOfSearch
+                ? "Loading..."
+                : "Load More Jobs"}
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

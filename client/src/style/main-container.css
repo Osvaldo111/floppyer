@@ -54,6 +54,10 @@
   margin-top: 15px;
 }
 
+.floppyer-mainpage > span {
+  cursor: pointer;
+}
+
 .floppyer-text {
   font-size: 16px;
   margin: 0;

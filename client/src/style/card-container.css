@@ -25,6 +25,11 @@
   padding: 5px 30px;
 }
 
+.container-serachNotFound {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+}
 /* Ultra small devices Example: Custom, iPhone Retina */
 @media (min-width: 320px) {
   .card-space {
