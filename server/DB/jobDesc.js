@@ -94,14 +94,14 @@ module.exports = {
           var jobsToStoreDB = [];
           for (let index = 0; index < stackOverflowJobs.length; index++) {
             // Remove all the entities and HTML tags from the data
-            const copyofDescrStackOv = new JSDOM(
-              stackOverflowJobs[index].description
-            );
-            stackOverflowJobs[
-              index
-            ].description = copyofDescrStackOv.window.document.querySelector(
-              "body"
-            ).textContent;
+            // const copyofDescrStackOv = new JSDOM(
+            //   stackOverflowJobs[index].description
+            // );
+            // stackOverflowJobs[
+            //   index
+            // ].description = copyofDescrStackOv.window.document.querySelector(
+            //   "body"
+            // ).textContent;
             // Parse the Date according to the DB Format.
             var mydate = new Date(stackOverflowJobs[index].pubDate);
             var newDate =

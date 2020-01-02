@@ -2,6 +2,7 @@ import React from "react";
 import NavigationBar from "./nav-bar";
 import "../style/job-description.css";
 import JobDescExtraInfo from "./job-desc-extraInfo";
+import parse from "html-react-parser";
 
 /**
  * @author Osvaldo Carrillo
@@ -82,10 +83,10 @@ export default class JobDescription extends React.Component {
                   title="Location"
                   content={item.job_location}
                 />
-                <JobDescExtraInfo
-                  title="Job Description"
-                  content={item.job_description}
-                />
+                <JobDescExtraInfo title="Job Description" />
+                <div className="job-desc-description">
+                  {parse(item.job_description)}
+                </div>
               </div>
             </div>
           );

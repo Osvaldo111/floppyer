@@ -53,6 +53,16 @@
 .job-desc-content {
   display: flex;
   flex-direction: column;
+  padding: 10px;
+}
+
+/* Style for the description of the job posted */
+.job-desc-description > ul {
+  padding: 10px;
+}
+
+.job-desc-description > br {
+  display: none;
 }
 /* Ultra small devices Example: Custom, iPhone Retina */
 @media (max-width: 320px) {
