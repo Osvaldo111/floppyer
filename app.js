@@ -2,15 +2,13 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var app = express();
-var DBMethods = require("./server/DB/jobDesc.js");
+var controllerMethods = require("./server/DB/controller.js");
 var sqlConnection = require("./server/DB/index.js");
 var session = require("express-session");
-var AdminMethods = require("./server/DB/administrador.js");
 const secretKey = require("./secretKey.js");
 var nodemailer = require("nodemailer");
-// 3 Days of the cookie lifetime
-const COOKIE_LIFETIME = 1000 * 60 * 60 * 24 * 3;
 
+const COOKIE_LIFETIME = 1000 * 60 * 60 * 24 * 3;
 var MySQLStore = require("express-mysql-session")(session);
 var sessionStore = new MySQLStore(
   {
@@ -39,10 +37,12 @@ app.use(
   })
 );
 
-// This is use for production
+/**This is for production */
 var sess = {
-  secret: "keyboard cat",
-  cookie: {}
+  secret: secretKey.secret_key,
+  cookie: {
+    maxAge: COOKIE_LIFETIME
+  }
 };
 
 if (app.get("env") === "production") {
@@ -58,55 +58,29 @@ app.use(express.static(path.join(__dirname, "client/build")));
  * Private Route serving job continer form
  * @name post/api/getJobs
  */
-app.post("/api/getJobs", function(req, res) {
-  // var transporter = nodemailer.createTransport({
-  //   service: "gmail",
-  //   auth: {
-  //     user: "",
-  //     pass: ""
-  //   }
-  // });
-
-  // var mailOptions = {
-  //   from: "",
-  //   to: "",
-  //   subject: "Sending Email using Node.js",
-  //   text: "That was easy!"
-  // };
-
-  // transporter.sendMail(mailOptions, function(error, info) {
-  //   if (error) {
-  //     console.log(error);
-  //   } else {
-  //     console.log("Email sent: " + info.response);
-  //   }
-  // });
-  DBMethods.getJobs(req, res, sqlConnection);
-});
+app.post("/api/getJobs", controllerMethods.getJobs);
 
 /**
  * Private Route serving job description form
  * @name post/api/getJobDescription
  */
-app.post("/api/getJobDescription", function(req, res) {
-  DBMethods.getJobDesc(req, res, sqlConnection);
-});
+app.post("/api/getJobDescription", controllerMethods.getJobDesc);
 
 /**
  * Private Route serving store jobs form
  * @name post/api/storeJobs
  */
-app.post("/api/storeJobs", function(req, res) {
-  DBMethods.storejobsDB(req, res, sqlConnection);
-});
+app.post("/api/storeJobs", controllerMethods.storeJobsFromStackOverflow);
 
 /**
  * Private Route serving job adminstrador login form
  * @name post/api/login
  */
-app.post("/api/login", middleware.authorization, function(req, res) {
-  DBMethods.getCredentialsLogIn(req, res, sqlConnection, sessionStore);
-});
+app.post(
+  "/api/login",
+  middleware.authorization,
+  controllerMethods.getCredentialsLogIn
+);
 
 /**
  * Private Route to authenticate users.
@@ -119,9 +93,7 @@ app.post("/api/auth", middleware.singleAuthorization);
  * @name post/api/getJobs
  */
 
-app.post("/api/logoutAdmin", function(req, res) {
-  AdminMethods.logoutUser(req, res, SESSION_NAME);
-});
+app.post("/api/logoutAdmin", controllerMethods.logoutUser);
 // match one above, send back React's index.html file.
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
