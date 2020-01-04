@@ -14,7 +14,8 @@ export default class InsertJobsForm extends React.Component {
       stackOverflowURL: "",
       errors: [],
       disableSubmit: false,
-      isCompleted: false
+      isCompleted: false,
+      disableButton: true
     };
   }
 
@@ -94,6 +95,9 @@ export default class InsertJobsForm extends React.Component {
               type="submit"
               value="Submit"
               disabled={this.state.disableSubmit}
+              style={{
+                backgroundColor: this.state.disableSubmit ? "white" : ""
+              }}
             />
             <p>{errors.length === 0 ? "" : "Check this, please: "}</p>
             {errors.map(error => (

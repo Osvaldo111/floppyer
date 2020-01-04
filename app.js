@@ -2,12 +2,23 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var app = express();
+var morgan = require("morgan");
+var nodemailer = require("nodemailer");
+
+//Controlllers
 var controllerMethods = require("./server/DB/controller.js");
+
+// SQL
 var sqlConnection = require("./server/DB/index.js");
 var session = require("express-session");
 const secretKey = require("./secretKey.js");
-var nodemailer = require("nodemailer");
 
+//Middlawares
+var middleware = require("./server/DB/Middleware/authorization.js");
+
+/**
+ * Cookies.
+ */
 const COOKIE_LIFETIME = 1000 * 60 * 60 * 24 * 3;
 var MySQLStore = require("express-mysql-session")(session);
 var sessionStore = new MySQLStore(
@@ -21,7 +32,6 @@ var sessionStore = new MySQLStore(
   } /* session store options */,
   sqlConnection
 );
-var middleware = require("./server/DB/Middleware/authorization.js");
 
 const SESSION_NAME = "sid";
 app.use(
@@ -37,7 +47,9 @@ app.use(
   })
 );
 
-/**This is for production */
+/**
+ * Cookies for production
+ */
 var sess = {
   secret: secretKey.secret_key,
   cookie: {
@@ -53,6 +65,7 @@ if (app.get("env") === "production") {
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); //for parsing application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, "client/build")));
+app.use(morgan("tiny")); //Log all the HTTP requests and responses
 
 /**
  * Private Route serving job continer form

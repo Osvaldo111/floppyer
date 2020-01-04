@@ -11,6 +11,15 @@ var sessionStore = new MySQLStore(
   {} /* session store options */,
   sqlConnection
 );
+
+//Model methods
+const mGetJobs = require("../../model/mGetJobs");
+const mGetJobDesc = require("../../model/mGetJobDescription.js");
+const mDeleteTable = require("../../model/mDeleteTableDB");
+const mResetAutoIncrement = require("../../model/mResetAutoIncrementDB");
+const mInsertDataStackOverflow = require("../../model/mInsertJobsStackOverflow");
+const mGetAdministradorCredentials = require("../../model/mGetAdminCredentials");
+
 module.exports = {
   /**
    * This function sends the data retrieve from
@@ -22,24 +31,16 @@ module.exports = {
    */
   getJobs(req, res) {
     var offsetIndex = req.body.offsetIndex;
-    var limitjobs = req.body.numJobs;
-    console.log(
-      "offset: ",
-      req.body.offsetIndex,
-      " Num Jobs: ",
-      req.body.numJobs,
-      "The Keyword",
-      req.body.keyword
-    );
+    var limitJobs = req.body.numJobs;
     var searchJobKeyWord = "%" + req.body.keyword + "%";
-    sqlConnection.query(
-      "SELECT * FROM `stackODaily` WHERE job_position LIKE ? LIMIT ? OFFSET ?",
-      [searchJobKeyWord, limitjobs, offsetIndex],
-      function(error, results) {
-        if (error) throw error;
-        res.json(results);
-      }
-    );
+    mGetJobs.queryGetJobs(searchJobKeyWord, limitJobs, offsetIndex, function(
+      error,
+      results
+    ) {
+      if (error) res.status(500).json({ error: error });
+
+      res.status(200).json(results);
+    });
   },
 
   /**
@@ -49,16 +50,12 @@ module.exports = {
    * @param {Object} res
    */
   getJobDesc(req, res) {
-    var job_id = req.body.example;
-    sqlConnection.query(
-      "SELECT * FROM stackoDaily WHERE id = ?",
-      [job_id],
-      function(error, results) {
-        if (error) throw error;
-        res.json(results);
-        // console.log("This is the results: ", results);
-      }
-    );
+    var jobId = req.body.example;
+
+    mGetJobDesc.queryGetJobDescription(jobId, function(error, results) {
+      if (error) res.status(500).json({ error: error });
+      res.status(200).json(results);
+    });
   },
 
   /**
@@ -95,14 +92,12 @@ module.exports = {
              * the functionality sync.
              */
             return new Promise((resolve, reject) => {
-              sqlConnection.query(
-                "DELETE FROM ??",
-                DB_TABLE,
-                (error, results, fields) => {
-                  if (error) return reject(error);
-                  resolve(results);
+              mDeleteTable.queryDeleteTable(DB_TABLE, function(error, results) {
+                if (error) {
+                  res.status(500).json({ error: error });
                 }
-              );
+                resolve(results);
+              });
             });
           })
           .then(() => {
@@ -112,14 +107,15 @@ module.exports = {
              * the functionality sync.
              */
             return new Promise((resolve, reject) => {
-              sqlConnection.query(
-                "ALTER TABLE ?? AUTO_INCREMENT = 1",
-                DB_TABLE,
-                (error, results, fields) => {
-                  if (error) return reject(error);
-                  resolve(results);
+              mResetAutoIncrement.queryResetAutoIncrement(DB_TABLE, function(
+                error,
+                results
+              ) {
+                if (error) {
+                  res.status(500).json({ error: error });
                 }
-              );
+                resolve(results);
+              });
             });
           })
           .then(() => {
@@ -166,11 +162,13 @@ module.exports = {
                    * Use async to loop the Promise correctly.
                    */
                   await new Promise((resolve, reject) => {
-                    sqlConnection.query(
-                      "INSERT INTO ?? SET ?",
-                      [DB_TABLE, jobs],
-                      (error, results) => {
-                        if (error) return reject(error);
+                    mInsertDataStackOverflow.queryInsertJobsStackOverflow(
+                      DB_TABLE,
+                      jobs,
+                      function(error, results) {
+                        if (error) {
+                          res.status(500).json({ error: error });
+                        }
                         resolve(results);
                       }
                     );
@@ -178,10 +176,10 @@ module.exports = {
                 }
               })
               .then(() => {
-                console.log("The jobs are store on the DB");
                 var errors = {
                   status: true
                 };
+                console.log("The jobs are store in the DB");
                 res.json(errors);
               })
               .catch(function(err) {
@@ -192,21 +190,27 @@ module.exports = {
     });
   },
 
+  /**
+   * This function is designed to log in the
+   * administrador.
+   * @param {Object} req
+   * @param {Object} res
+   */
   getCredentialsLogIn(req, res) {
-    var credentials = req.body.credentials;
+    var userName = req.body.credentials.username;
+    var password = req.body.credentials.password;
 
-    sqlConnection.query(
-      "SELECT user FROM users WHERE user = ? AND user_password = ?",
-      [credentials.username, credentials.password],
-      function(error, results, fields) {
-        if (error) throw error;
+    mGetAdministradorCredentials.queryGetAdminCredentials(
+      userName,
+      password,
+      function(error, results) {
+        if (error) res.status(500).json({ error: error });
+
         if (results.length > 0) {
           req.session.user = results[0].user;
-          // console.log(results[0].user);
           res.json(true);
         } else {
           res.json(false);
-          // console.log("invalid Credentials");
         }
       }
     );
@@ -222,13 +226,15 @@ module.exports = {
    * @param {Object} res
    */
   logoutUser(req, res) {
-    console.log(req.session);
     var getSessionId = req.sessionID;
     sessionStore.destroy(getSessionId, function(error) {
-      if (error) throw error;
+      if (error) {
+        throw error;
+      } else {
+        req.session.destroy();
+        res.clearCookie(SESSION_NAME, { path: "/" });
+        res.json(true);
+      }
     });
-    req.session.destroy();
-    res.clearCookie(SESSION_NAME, { path: "/" });
-    res.json(true);
   }
 };
