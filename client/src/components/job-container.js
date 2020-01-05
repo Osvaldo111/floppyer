@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setSearchBoxData } from "../actions";
 import DataEnteredDisplay from "./dataSearchBox";
+import { ServerError } from "./serverError500";
 import moment from "moment"; // Use this module to format the date
 /**
  * @author Osvaldo Carrillo
@@ -25,7 +26,8 @@ class JobsContaier extends React.Component {
       currentSearch: null,
       displayNotFoundSearch: false,
       loadingResultsOfSearch: false,
-      jobsWithSameKeyword: false
+      jobsWithSameKeyword: false,
+      is500Error: false
     };
   }
 
@@ -76,9 +78,15 @@ class JobsContaier extends React.Component {
           })
         })
           .then(result => {
-            return result.json();
+            // Check the response
+            if (result.status === 500) {
+              throw new Error(result.status);
+            } else {
+              return result.json();
+            }
           })
           .then(result => {
+            console.log("Result getJob see status: ", result);
             // Reset the "displayNotFoundSearch".
             // And assign the "currentSearch" to compare with the last search.
             this.setState({
@@ -124,6 +132,9 @@ class JobsContaier extends React.Component {
               loadingPage: false,
               loadingResultsOfSearch: false
             });
+          })
+          .catch(error => {
+            this.setState({ is500Error: true });
           });
       }
     );
@@ -131,7 +142,9 @@ class JobsContaier extends React.Component {
 
   render() {
     const { list } = this.state;
+    const { is500Error } = this.state;
 
+    if (is500Error) return <ServerError />;
     if (this.state.loadingPage) return "Loading, wait.....";
 
     if (this.state.displayNotFoundSearch)

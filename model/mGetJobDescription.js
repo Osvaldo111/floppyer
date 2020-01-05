@@ -7,10 +7,10 @@ var sqlConnection = require("../server/DB/index.js");
  * @param {Integer} JobId
  * @param {Callback} callback
  */
-const queryGetJobDescription = (JobId, callback) => {
+const queryGetJobDescription = (TABLE_NAME, JobId, callback) => {
   sqlConnection.query(
-    "SELECT * FROM stackoDaily WHERE id = ?",
-    [JobId],
+    "SELECT * FROM ?? WHERE id = ?",
+    [TABLE_NAME, JobId],
     function(error, results) {
       if (error) callback(error, results);
       callback(null, results);

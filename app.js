@@ -7,7 +7,14 @@ var nodemailer = require("nodemailer");
 
 //Controlllers
 var controllerMethods = require("./server/DB/controller.js");
+/***Erase top when completed */
+var cGetJobDesc = require("./controller/cGetJobDesc");
 
+//Import Routes
+var getJobs = require("./routes/rGetJobs");
+var jobDescription = require("./routes/rGetJobDesc");
+var storeJobs = require("./routes/rStoreJobs");
+var login = require("./routes/rLogin");
 // SQL
 var sqlConnection = require("./server/DB/index.js");
 var session = require("express-session");
@@ -71,29 +78,26 @@ app.use(morgan("tiny")); //Log all the HTTP requests and responses
  * Private Route serving job continer form
  * @name post/api/getJobs
  */
-app.post("/api/getJobs", controllerMethods.getJobs);
+app.use("/api/getJobs", getJobs);
 
 /**
  * Private Route serving job description form
  * @name post/api/getJobDescription
  */
-app.post("/api/getJobDescription", controllerMethods.getJobDesc);
+app.use("/api/getJobDescription", jobDescription);
 
 /**
  * Private Route serving store jobs form
  * @name post/api/storeJobs
  */
-app.post("/api/storeJobs", controllerMethods.storeJobsFromStackOverflow);
+app.use("/api/storeJobs", storeJobs);
 
 /**
  * Private Route serving job adminstrador login form
  * @name post/api/login
  */
-app.post(
-  "/api/login",
-  middleware.authorization,
-  controllerMethods.getCredentialsLogIn
-);
+//middleware.authorization,
+app.use("/api/login", middleware.authorization, login);
 
 /**
  * Private Route to authenticate users.
@@ -105,8 +109,14 @@ app.post("/api/auth", middleware.singleAuthorization);
  * Private Route serving job continer
  * @name post/api/getJobs
  */
-
 app.post("/api/logoutAdmin", controllerMethods.logoutUser);
+
+/**
+ * @name /testing
+ */
+const cGetJobsFROMWWR = require("./controller/cGetJobsFromWWR");
+app.use("/testing", cGetJobsFROMWWR.storeJobsFromWWR);
+
 // match one above, send back React's index.html file.
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));

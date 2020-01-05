@@ -16,7 +16,7 @@ export default class LoginAdministrador extends React.Component {
       password: "",
       isSigned: null,
       errorMessages: "",
-      loading: true
+      loadingResponse: false
     };
   }
 
@@ -44,32 +44,35 @@ export default class LoginAdministrador extends React.Component {
   };
 
   getApprovalForLogin = credentials => {
-    fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify({ credentials: credentials })
-    })
-      .then(result => result.json())
-      .then(result => {
-        this.setState({ isSigned: result });
-      });
+    this.setState({ loadingResponse: true }, () => {
+      fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify({ credentials: credentials })
+      })
+        .then(result => result.json())
+        .then(result => {
+          this.setState({ isSigned: result });
+        });
+    });
   };
-
+  /**
+   * Check if the user is already logged
+   * with cookies
+   */
   getAuthorization = () => {
     fetch("/api/auth", {
       method: "POST"
     })
       .then(result => result.json())
       .then(result => {
-        this.setState({ isSigned: result, loading: false });
+        this.setState({ isSigned: result });
       });
   };
   render() {
-    if (this.state.loading) {
-      return "Loading...";
-    }
+    const { loadingResponse } = this.state;
     if (this.state.isSigned) {
       return <Redirect to={"/storeJobsDB"} />;
     }
@@ -103,6 +106,7 @@ export default class LoginAdministrador extends React.Component {
               required
             />
             <input type="submit" value="Submit" />
+            <p>{loadingResponse ? "Loading...." : ""}</p>
           </form>
         </div>
       </div>

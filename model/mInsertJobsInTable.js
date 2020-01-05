@@ -7,7 +7,7 @@ var sqlConnection = require("../server/DB/index.js");
  * @param {Object} jobs
  * @param {Callback} callback
  */
-const queryInsertJobsStackOverflow = (TABLE_NAME, jobs, callback) => {
+const queryInsertJobsInTable = (TABLE_NAME, jobs, callback) => {
   sqlConnection.query(
     "INSERT INTO ?? SET ?",
     [TABLE_NAME, jobs],
@@ -19,5 +19,5 @@ const queryInsertJobsStackOverflow = (TABLE_NAME, jobs, callback) => {
 };
 
 module.exports = {
-  queryInsertJobsStackOverflow: queryInsertJobsStackOverflow
+  queryInsertJobsInTable: queryInsertJobsInTable
 };

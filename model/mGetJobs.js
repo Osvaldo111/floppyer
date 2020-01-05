@@ -10,10 +10,16 @@ var sqlConnection = require("../server/DB/index.js");
  * @param {Integer} offsetIndex
  * @param {callback} callback
  */
-const queryGetJobs = (searchKeyWord, limitJobs, offsetIndex, callback) => {
+const queryGetJobs = (
+  TABLE_NAME,
+  searchKeyWord,
+  limitJobs,
+  offsetIndex,
+  callback
+) => {
   sqlConnection.query(
-    "SELECT * FROM `stackODaily` WHERE job_position LIKE ? LIMIT ? OFFSET ?",
-    [searchKeyWord, limitJobs, offsetIndex],
+    "SELECT * FROM ?? WHERE job_position LIKE ? LIMIT ? OFFSET ?",
+    [TABLE_NAME, searchKeyWord, limitJobs, offsetIndex],
     function(error, results) {
       if (error) {
         callback(error, null);

@@ -3,6 +3,7 @@ import NavigationBar from "./nav-bar";
 import "../style/job-description.css";
 import JobDescExtraInfo from "./job-desc-extraInfo";
 import parse from "html-react-parser";
+import { ServerError } from "./serverError500";
 
 /**
  * @author Osvaldo Carrillo
@@ -15,7 +16,8 @@ export default class JobDescription extends React.Component {
     super(props);
     this.state = {
       jodDescription: "",
-      loading: true
+      loading: true,
+      is500Error: false
     };
   }
 
@@ -35,7 +37,12 @@ export default class JobDescription extends React.Component {
       },
       body: JSON.stringify({ example: job_id })
     })
-      .then(result => result.json())
+      .then(result => {
+        if (result.status === 500) {
+          throw new Error(result.status);
+        }
+        return result.json();
+      })
       .then(info => {
         if (info.length <= 0) {
           console.log("No Exists", info, job_id);
@@ -43,12 +50,17 @@ export default class JobDescription extends React.Component {
         }
 
         this.setState({ loading: false, jobDescription: info });
-        console.log(info);
+      })
+      .catch(error => {
+        console.log("THE ERROR: ", error);
+        this.setState({ is500Error: true });
       });
   }
   render() {
     const jobDescription = this.state.jobDescription;
+    const { is500Error } = this.state;
 
+    if (is500Error) return <ServerError />;
     if (this.state.loading) {
       return "Loading...";
     }
