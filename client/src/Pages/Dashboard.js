@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import NavigationBarAdministrador from "./nav-bar-admin";
+import NavigationBarAdministrador from "../components/nav-bar-admin";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { checkAdminLogout } from "../actions";
-import InsertJobsForm from "./insertJobs-form";
+import InsertJobsForm from "../components/insertJobs-form";
 
 /**
  * @author Osvaldo Carrillo
@@ -22,17 +22,28 @@ class StorejobsDB extends Component {
   }
 
   logoutUser = () => {
-    this.setState({ isLoading: true });
-    fetch("/api/logoutAdmin", {
-      method: "POST"
-    })
-      .then(result => result.json())
-      .then(result => {
-        this.setState({ isSignedOut: result });
-        this.setState({ isLoading: false });
-        // Reset the value to avoid unexpedted results
-        this.props.checkAdminLogout(false);
-      });
+    this.setState({ isLoading: true }, () => {
+      fetch("/api/logoutAdmin", {
+        method: "POST"
+      })
+        .then(result => result.json())
+        .then(result => {
+          console.log("Last layer");
+          if (result) {
+            this.setState({ isSignedOut: result });
+            this.setState({ isLoading: false });
+            // Reset the value from the reducer
+            // to avoid unexpedted results
+            this.props.checkAdminLogout(false);
+          }
+        })
+        .catch(async () => {
+          await this.setState({ isLoading: false });
+
+          // Catching the 500 status
+          alert("Server Error 500");
+        });
+    });
   };
 
   componentDidUpdate(prevProps) {

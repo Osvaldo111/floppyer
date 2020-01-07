@@ -20,7 +20,7 @@ getCredentialsLogIn = (req, res) => {
         req.session.user = results[0].user;
         res.status(200).json(true);
       } else {
-        res.status(500).json({ error: "error" });
+        res.status(200).json(false);
       }
     }
   );

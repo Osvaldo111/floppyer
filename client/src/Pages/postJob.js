@@ -1,6 +1,6 @@
 import React from "react";
 import "../style/form-post-job.css";
-import NavigationBar from "./nav-bar";
+import NavigationBar from "../components/nav-bar";
 
 /**
  * @author Osvaldo Carrillo

@@ -3,23 +3,17 @@ var express = require("express");
 var path = require("path");
 var app = express();
 var morgan = require("morgan");
-var nodemailer = require("nodemailer");
-
-//Controlllers
-var controllerMethods = require("./server/DB/controller.js");
-/***Erase top when completed */
-var cGetJobDesc = require("./controller/cGetJobDesc");
 
 //Import Routes
 var getJobs = require("./routes/rGetJobs");
 var jobDescription = require("./routes/rGetJobDesc");
 var storeJobs = require("./routes/rStoreJobs");
 var login = require("./routes/rLogin");
+var logout = require("./routes/rLogout");
 // SQL
 var sqlConnection = require("./server/DB/index.js");
 var session = require("express-session");
 const secretKey = require("./secretKey.js");
-
 //Middlawares
 var middleware = require("./server/DB/Middleware/authorization.js");
 
@@ -96,8 +90,7 @@ app.use("/api/storeJobs", storeJobs);
  * Private Route serving job adminstrador login form
  * @name post/api/login
  */
-//middleware.authorization,
-app.use("/api/login", middleware.authorization, login);
+app.use("/api/login", login);
 
 /**
  * Private Route to authenticate users.
@@ -109,7 +102,7 @@ app.post("/api/auth", middleware.singleAuthorization);
  * Private Route serving job continer
  * @name post/api/getJobs
  */
-app.post("/api/logoutAdmin", controllerMethods.logoutUser);
+app.use("/api/logoutAdmin", logout);
 
 /**
  * @name /testing

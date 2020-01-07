@@ -1,11 +1,11 @@
 import React from "react";
-import MainContainer from "./components/mainPage-container";
+import MainContainer from "./Pages/mainPage-container";
 import JobDescription from "./components/job-desctiption";
-import PostJobForm from "./components/form-post-job";
-import LoginAdminstrador from "./components/login";
+import PostJob from "./Pages/postJob";
+import LoginAdminstrador from "./Pages/login";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import DashBoard from "./components/storeJobsDBForm";
+import DashBoard from "./Pages/Dashboard";
 import PrivateRoute from "./components/Authentication/route-authentication";
 function App() {
   // return <MainConainer />;
@@ -22,7 +22,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={MainContainer} />
         <Route path="/description/:id" component={JobDescription} />
-        <Route path="/postJob" component={PostJobForm} />
+        <Route path="/postJob" component={PostJob} />
         <Route path="/login" component={LoginAdminstrador} />
         <PrivateRoute path="/storeJobsDB" component={DashBoard}></PrivateRoute>
         <Route path="*" component={NoMatch} />

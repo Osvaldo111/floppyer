@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { ServerError } from "../components/serverError500";
 
 /**
  * @author Osvaldo Carrillo
@@ -15,8 +16,9 @@ export default class LoginAdministrador extends React.Component {
       username: "",
       password: "",
       isSigned: null,
-      errorMessages: "",
-      loadingResponse: false
+      wrongCredentials: false,
+      loadingResponse: false,
+      isServerError500: false
     };
   }
 
@@ -52,9 +54,33 @@ export default class LoginAdministrador extends React.Component {
         },
         body: JSON.stringify({ credentials: credentials })
       })
-        .then(result => result.json())
         .then(result => {
-          this.setState({ isSigned: result });
+          if (result.status === 500) {
+            throw new Error(result.status);
+          }
+          return result.json();
+        })
+        .then(result => {
+          // Reseting the variables
+          this.setState({
+            loadingResponse: false,
+            wrongCredentials: false,
+            isServerError500: false
+          });
+          return result;
+        })
+        .then(result => {
+          if (result) {
+            this.setState({ isSigned: result });
+          }
+          this.setState({ wrongCredentials: true });
+        })
+        .catch(error => {
+          this.setState({
+            isServerError500: true,
+            loadingResponse: false,
+            wrongCredentials: false
+          });
         });
     });
   };
@@ -73,6 +99,9 @@ export default class LoginAdministrador extends React.Component {
   };
   render() {
     const { loadingResponse } = this.state;
+    const { isServerError500 } = this.state;
+    const { wrongCredentials } = this.state;
+
     if (this.state.isSigned) {
       return <Redirect to={"/storeJobsDB"} />;
     }
@@ -107,6 +136,8 @@ export default class LoginAdministrador extends React.Component {
             />
             <input type="submit" value="Submit" />
             <p>{loadingResponse ? "Loading...." : ""}</p>
+            <p>{isServerError500 ? "Server Error 500" : ""}</p>
+            <p>{wrongCredentials ? "Wrong Credentials" : ""}</p>
           </form>
         </div>
       </div>
