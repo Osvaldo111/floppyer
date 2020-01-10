@@ -1,6 +1,6 @@
 import React from "react";
 import MainContainer from "./Pages/mainPage-container";
-import JobDescription from "./components/job-desctiption";
+import JobDescription from "./components/JobDesctiption";
 import PostJob from "./Pages/postJob";
 import LoginAdminstrador from "./Pages/login";
 

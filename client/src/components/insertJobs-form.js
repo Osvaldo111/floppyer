@@ -1,5 +1,5 @@
 import React from "react";
-import { ServerErrors, ServerError } from "./serverError500";
+import { ServerErrors, ServerError } from "./ServerError500";
 /**
  * @author Osvaldo Carrillo
  * Date: 12/25/2019

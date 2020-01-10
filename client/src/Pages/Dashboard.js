@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import NavigationBarAdministrador from "../components/nav-bar-admin";
+import NavigationBarAdministrador from "../components/NavBarAdmin";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { checkAdminLogout } from "../actions";
-import InsertJobsForm from "../components/insertJobs-form";
+import InsertJobsForm from "../components/InsertJobs-form";
 
 /**
  * @author Osvaldo Carrillo

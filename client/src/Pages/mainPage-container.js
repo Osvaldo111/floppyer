@@ -1,8 +1,8 @@
 import React from "react";
 import "../style/main-container.css";
-import JobsContaier from "../components/job-container";
-import NavigationBar from "../components/nav-bar";
-import SearchBox from "../components/search-box";
+import JobsContaier from "../components/JobContainer";
+import NavigationBar from "../components/NavBar";
+import SearchBox from "../components/SearchBox";
 import { Link } from "react-router-dom";
 import { setSearchBoxData } from "../actions";
 import { connect } from "react-redux";

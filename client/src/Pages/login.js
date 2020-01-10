@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { ServerError } from "../components/serverError500";
+import { ServerError } from "../components/ServerError500";
 
 /**
  * @author Osvaldo Carrillo
