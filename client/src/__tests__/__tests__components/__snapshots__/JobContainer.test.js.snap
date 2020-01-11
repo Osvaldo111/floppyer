@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fetch data to display all the jobs 1`] = `
+<DocumentFragment>
+  <div>
+    <p>
+      Example2
+    </p>
+    <p>
+      Example1
+    </p>
+  </div>
+</DocumentFragment>
+`;

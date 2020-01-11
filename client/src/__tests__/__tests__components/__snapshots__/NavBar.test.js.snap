@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar Component Renders the Navigation Bar 1`] = `
+<DocumentFragment>
+  <div
+    class="navBar-wrapper"
+  >
+    <div
+      class="navigation-bar"
+    >
+      <a
+        class="navbar-floppyer"
+        href="/"
+      >
+        <span
+          data-testid="title"
+        >
+          floppyer
+        </span>
+      </a>
+      <a
+        class="navbar-btn-wrapper"
+        href="/postJob"
+      >
+        <button
+          class="button-main-page"
+        >
+          Post Job
+        </button>
+      </a>
+      <div
+        class="navbar-ham-btn-wrapper"
+      >
+        <button
+          class="navbar-mobile-button"
+        />
+      </div>
+    </div>
+    <div
+      class="navbar-mobile-button-options"
+      style="display: none;"
+    >
+      <div
+        class="navbar-mobile-btn-wrapper"
+      >
+        <a
+          href="/postJob"
+        >
+          <p>
+            Post Job
+          </p>
+        </a>
+      </div>
+      <div
+        class="navbar-mobile-btn-wrapper"
+      >
+        <a
+          href="/"
+        >
+          <p>
+            Home
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
