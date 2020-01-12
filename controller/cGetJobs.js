@@ -1,5 +1,5 @@
 const mGetJobs = require("../model/mGetJobs");
-const DB_TABLE = "stackoverflowjobs";
+const DB_TABLE = "generaljobs";
 
 /**
  * This function sends the data retrieve from

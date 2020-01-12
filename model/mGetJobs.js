@@ -18,7 +18,7 @@ const queryGetJobs = (
   callback
 ) => {
   sqlConnection.query(
-    "SELECT * FROM ?? WHERE job_position LIKE ? LIMIT ? OFFSET ?",
+    "SELECT * FROM ?? WHERE job_position COLLATE UTF8MB4_GENERAL_CI LIKE ? ORDER BY date_posted DESC LIMIT ? OFFSET ?",
     [TABLE_NAME, searchKeyWord, limitJobs, offsetIndex],
     function(error, results) {
       if (error) {

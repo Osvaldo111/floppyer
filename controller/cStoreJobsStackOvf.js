@@ -3,8 +3,8 @@ var xml2js = require("xml2js");
 const mInsertDataInTable = require("../model/mInsertJobsInTable");
 const mDeleteTable = require("../model/mDeleteTableDB");
 const mResetAutoIncrement = require("../model/mResetAutoIncrementDB");
-const DB_TABLE = "stackoverflowjobs";
-// stackoverflowjobs;
+const DB_TABLE = "generaljobs";
+
 /**
  * This function is designed to fetch and save the RSS feed
  * from the website "weworkremotely.com/"

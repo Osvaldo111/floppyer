@@ -104,11 +104,13 @@ app.post("/api/auth", middleware.singleAuthorization);
  */
 app.use("/api/logoutAdmin", logout);
 
+const postJob = require("./routes/rPostJob");
+app.use("/postJob", postJob);
 /**
  * @name /testing
  */
-const cGetJobsFROMWWR = require("./controller/cGetJobsFromWWR");
-app.use("/testing", cGetJobsFROMWWR.storeJobsFromWWR);
+// const cGetPostData = require("./controller/cGetPostJobData");
+// app.use("/testing", cGetPostData.getPostJobData);
 
 // match one above, send back React's index.html file.
 app.get("*", (req, res) => {

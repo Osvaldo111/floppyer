@@ -1,5 +1,5 @@
 const mGetJobDesc = require("../model/mGetJobDescription.js");
-const DB_TABLE = "stackoverflowjobs";
+const DB_TABLE = "generaljobs";
 
 /**
  * This function sends the description of the job

@@ -69,9 +69,11 @@ class MainContainer extends React.Component {
     return (
       <div className="container-mainPage">
         <div className="top-mainPage">
-          <Link to="/postJob" className="btn-mainpage">
-            <button className="button-main-page">Post Job</button>
-          </Link>
+          <div className="btn-mainpage">
+            <Link to="/postJob">
+              <button className="button-main-page">Post Job</button>
+            </Link>
+          </div>
           <div className="floppyer-mainpage">
             <span onClick={this.logoIsClicked}>floppyer</span>
             <p className="floppyer-text">
@@ -84,9 +86,11 @@ class MainContainer extends React.Component {
               <SearchBox />
             </div>
           </div>
-          <Link to="/postJob" className="btn-mainpage-bottom">
-            <button className="button-main-page">Post Job</button>
-          </Link>
+          <div className="btn-mainpage-bottom">
+            <Link to="/postJob">
+              <button className="button-main-page">Post Job</button>
+            </Link>
+          </div>
         </div>
         <div className="display-nav" style={{ display: this.state.display }}>
           <NavigationBar hideNavBar={this.state.hideBarInTopPage} />
