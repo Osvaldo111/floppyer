@@ -8,3 +8,4 @@ CREATE TABLE postJobs
     contact VARCHAR(2000) NOT NULL,
     comments VARCHAR(9000) NOT NULL
 );
+

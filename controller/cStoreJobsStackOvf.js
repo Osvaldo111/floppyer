@@ -3,7 +3,7 @@ var xml2js = require("xml2js");
 const mInsertDataInTable = require("../model/mInsertJobsInTable");
 const mDeleteTable = require("../model/mDeleteTableDB");
 const mResetAutoIncrement = require("../model/mResetAutoIncrementDB");
-const DB_TABLE = "generaljobs";
+const DB_TABLE = "stackoverflow";
 
 /**
  * This function is designed to fetch and save the RSS feed
@@ -11,7 +11,7 @@ const DB_TABLE = "generaljobs";
  */
 storeJobsFromStackOverflow = (req, res) => {
   /**Reques the data from the RSS feed */
-  const linkToRSS = req.body.stackOverflowURL;
+  const linkToRSS = req.body.siteUrl;
 
   Promise.resolve(true)
     .then(() => {

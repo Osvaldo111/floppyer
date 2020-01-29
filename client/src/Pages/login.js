@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Example } from "../components/JobCard";
 import { ServerError } from "../components/ServerError500";
 
 /**
