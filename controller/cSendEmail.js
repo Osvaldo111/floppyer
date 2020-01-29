@@ -1,6 +1,6 @@
 var nodemailer = require("nodemailer");
-const getEmail = require("../client/emailCredentials/email");
-const getPassword = require("../client/emailCredentials/password");
+const getEmail = require("../emailCredentials/email");
+const getPassword = require("../emailCredentials/password");
 sendEmail = message => {
   console.log(getEmail.email);
 

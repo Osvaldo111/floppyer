@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
-var cStoreJobsStackOvf = require("../controller/cStoreJobsStackOvf");
+var cStoreJobs = require("../controller/cStoreJobs");
 
-router.post("/", cStoreJobsStackOvf.storeJobsFromStackOverflow);
+router.post("/", cStoreJobs.storeJobs);
 
 module.exports = router;

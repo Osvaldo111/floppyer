@@ -11,7 +11,7 @@ export default class InsertJobsForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stackOverflowURL: "",
+      siteUrl: "",
       errors: [],
       disableSubmit: false,
       isCompleted: false,
@@ -26,7 +26,7 @@ export default class InsertJobsForm extends React.Component {
         headers: {
           "Content-type": "application/json"
         },
-        body: JSON.stringify({ stackOverflowURL: url })
+        body: JSON.stringify({ siteUrl: url })
       })
         .then(result => {
           this.setState({ errors: [], loadingResult: false });
@@ -49,11 +49,11 @@ export default class InsertJobsForm extends React.Component {
         });
     });
   }
-  getStackOverflowURL = event => {
-    this.setState({ stackOverflowURL: event.target.value });
+  getSiteUrl = event => {
+    this.setState({ siteUrl: event.target.value });
   };
   handleSubmission = event => {
-    var urlLink = this.state.stackOverflowURL;
+    var urlLink = this.state.siteUrl;
     /**
      * OPTIONAL Validation
      * This is in case you don't want to
@@ -93,8 +93,8 @@ export default class InsertJobsForm extends React.Component {
               id="stackOverflowURL"
               name=""
               placeholder="StackOverflow RSS URL .."
-              onChange={this.getStackOverflowURL}
-              value={this.state.stackOverflowURL}
+              onChange={this.getSiteUrl}
+              value={this.state.siteUrl}
             />
             <input
               type="submit"
