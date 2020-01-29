@@ -5,4 +5,4 @@
 # /emailCredentials
 
 /node_modules
-/.env
+# /.env
