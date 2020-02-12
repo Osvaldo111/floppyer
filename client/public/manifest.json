@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Floppyer",
+  "name": "Floppyer Remote Jobs",
   "icons": [],
   "start_url": ".",
   "display": "standalone",
