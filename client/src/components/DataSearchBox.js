@@ -26,7 +26,7 @@ class DataEnteredDisplay extends React.Component {
             ""
           ) : (
             <button onClick={this.removeData} className="dataSearchBox-btn">
-              {this.props.searchBoxData}
+              <p>{this.props.searchBoxData}</p>
               <span className="dataSearchBox-close">&times;</span>
             </button>
           )}

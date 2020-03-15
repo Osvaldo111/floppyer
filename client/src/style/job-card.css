@@ -1,6 +1,6 @@
 /* This is the style of the job card container*/
 .job-card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-bottom: 2px solid rgb(221, 221, 221);
   transition: 0.3s;
   margin-bottom: 10px;
 }

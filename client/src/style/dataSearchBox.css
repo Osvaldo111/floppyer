@@ -3,10 +3,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: "Baloo Bhai", cursive;
+  /* font-family: "Baloo Bhai", cursive; */
 }
 .dataSearchBox-wrapper > p {
-  margin: 0;
+  margin: 10px 0;
 }
 .dataSearchBox-btn {
   background-color: #6495ed;
@@ -18,11 +18,21 @@
   cursor: pointer;
   border-radius: 59px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.dataSearchBox-btn > p {
+  margin: 0;
+}
 .dataSearchBox-close {
   font-size: 30px;
   padding-left: 20px;
+  color: #dcdcdc;
+}
+
+.dataSearchBox-close:hover {
   color: red;
 }
